@@ -1,12 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LayoutModule } from '../layout/layout.module';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    LayoutModule,
+    HttpClientModule,
+    RouterModule
   ],
-  declarations: []
+  declarations: [],
+  exports: [
+      LayoutModule, HttpClientModule, CommonModule, FormsModule, ReactiveFormsModule
+  ]
 })
 export class SharedModule { }

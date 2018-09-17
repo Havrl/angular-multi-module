@@ -4,9 +4,11 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-navbar-layout',
   template: `
     <app-navbar></app-navbar>
-    <router-outlet></router-outlet>
+    <div id="container" class="container-fluid">
+        <router-outlet></router-outlet>
+    </div>
   `,
-  styles: []
+  styles: ['#container { padding-top: 25px; }']
 })
 export class NavbarLayoutComponent implements OnInit {
 

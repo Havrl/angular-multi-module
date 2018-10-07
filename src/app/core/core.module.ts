@@ -9,12 +9,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpTokenInterceptor } from './interceptors/http.token.interceptors';
 import { LoadGuard } from './guards/load-guard';
 import { DataService } from './services/data.service';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   imports: [
     SharedModule
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, NotFoundComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     AuthGuard,

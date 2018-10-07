@@ -1,7 +1,7 @@
 import { CompanyListComponent } from './components/company-list/company-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { NavbarLayoutComponent } from '../layout/navbar-layout/navbar-layout.component';
+import { NavbarLayoutComponent } from '../shared/layout/navbar-layout/navbar-layout.component';
 
 const routes: Routes = [
     {

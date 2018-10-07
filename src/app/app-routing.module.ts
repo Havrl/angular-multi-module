@@ -4,16 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NgModule } from '@angular/core';
 import { AuthGuard } from './core/guards/auth-guard';
+import { NotFoundComponent } from './core/components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'companies', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'companies', canLoad: [LoadGuard], canActivate: [AuthGuard], loadChildren: './companies/companies.module#CompaniesModule' },
   { path: 'companies/:companyId/settings', canActivate: [AuthGuard], canLoad: [LoadGuard],
-    loadChildren: 'src/app/company-settings/company-settings.module#CompanySettingsModule' },
-  { path: 'files', canActivate: [AuthGuard], canLoad: [LoadGuard],
-    loadChildren: 'src/app/file-management/file-management.module#FileManagementModule' },
-  // { path: '**', component: NotFoundComponent }
+    loadChildren: './company-settings/company-settings.module#CompanySettingsModule' },
+  { path: 'companies/:companyId/files', canActivate: [AuthGuard], canLoad: [LoadGuard],
+    loadChildren: './file-management/file-management.module#FileManagementModule' },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

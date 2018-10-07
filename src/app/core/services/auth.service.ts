@@ -1,6 +1,6 @@
 import { JwtService } from './jwt.service';
 import { Injectable } from '@angular/core';
-import { User } from '../../models/user.model';
+import { User } from '../../shared/models/user.model';
 import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { ApiService } from './api.service';

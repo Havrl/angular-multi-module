@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Router, ActivationEnd, Event } from '@angular/router';
+import { Subscription, Observable } from 'rxjs';
+import { Router, ActivationEnd, Event, ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../core/services/data.service';
+import { CompanyDetails } from '../../models/company-details.model';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'app-company-details',
@@ -19,27 +21,23 @@ import { DataService } from '../../../core/services/data.service';
 })
 export class CompanyDetailsComponent implements OnInit, OnDestroy {
 
-    companyData = {};
-    routerSubscription: Subscription;
+    companyId: number;
+    companyData: Observable<{companyDetails: CompanyDetails}>;
 
-    constructor(private router: Router, private dataService: DataService) {
-        this.routerSubscription = this.subscribeRouter();
+    constructor(
+      private router: Router,
+      private route: ActivatedRoute,
+      private dataService: DataService,
+      private store: Store<{companyDetails: CompanyDetails}>
+      ) {
     }
 
     ngOnInit() {
-    }
+      this.companyId = +this.route.snapshot.params['companyId'];
 
-    subscribeRouter() {
-        return this.router.events.subscribe(
-            (event: Event) => {
+      // this.loadData(this.companyId);
 
-                if (event instanceof ActivationEnd && event.snapshot.params['companyId']) {
-                    const id = +event.snapshot.params['companyId'];
-
-                    this.loadData(id);
-                }
-            }
-        );
+      // this.companyData = this.store.select('companyDetails');
     }
 
     loadData(companyId: number) {
@@ -49,9 +47,6 @@ export class CompanyDetailsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.routerSubscription) {
-            this.routerSubscription.unsubscribe();
-        }
     }
 
 }

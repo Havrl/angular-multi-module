@@ -3,6 +3,7 @@ import { DataService } from './../../../core/services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import * as CompanyListActions from './company-list.actions';
 
 @Component({
   selector: 'app-company-list',
@@ -43,9 +44,9 @@ export class CompanyListComponent implements OnInit {
 
     this.companiesState = this.store.select('companies');
 
-    /* this.dataService.getCompanyList().subscribe(
-        data => this.companies = data
-    ); */
+    this.dataService.getCompanyList().subscribe(
+        data => this.store.dispatch(new CompanyListActions.ListCompanies(data))
+    );
 
   }
 

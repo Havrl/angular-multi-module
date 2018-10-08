@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import * as CompanyListActions from '../company-list/company-list.actions';
 
 @Component({
   selector: 'app-add-company',
@@ -21,7 +22,7 @@ export class AddCompanyComponent implements OnInit {
 
   companyForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private store: Store<{companies: {companies: Company[]}}>) { }
 
   ngOnInit() {
 
@@ -40,6 +41,7 @@ export class AddCompanyComponent implements OnInit {
     };
 
     console.log('save company', newCompany);
+    this.store.dispatch(new CompanyListActions.AddCompany(newCompany));
   }
 
 }
